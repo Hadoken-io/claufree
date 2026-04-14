@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' https://js.puter.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src https://*.puter.com wss://*.puter.com; frame-src https://*.puter.com; object-src 'none'; base-uri 'self'; form-action 'self'"
+  />
+  <title>Claufree Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section id="startScreen" class="start-screen" aria-labelledby="startTitle">
+    <div class="start-card">
+      <p class="start-badge">Open Source Chatbot</p>
+      <h1 id="startTitle">Claufree</h1>
+      <p class="start-copy">
+        Claufree is an open source chatbot interface. This sign-in form belongs to Claufree and sends your profile data to Puter as part of your chat context.
+      </p>
+
+      <form id="startForm" class="start-form">
+        <label for="profileName">Display name</label>
+        <input id="profileName" name="profileName" type="text" maxlength="70" placeholder="Your name" required />
+
+        <label for="profileEmail">Email (optional)</label>
+        <input id="profileEmail" name="profileEmail" type="email" maxlength="120" placeholder="you@example.com" />
+
+        <label class="consent-row" for="profileConsent">
+          <input id="profileConsent" name="profileConsent" type="checkbox" required />
+          <span>I agree to share this profile data and my prompts with Puter for chat processing.</span>
+        </label>
+
+        <button id="startButton" type="submit">Start Claufree</button>
+      </form>
+
+      <p class="start-footnote">No Puter login form is shown on this start page.</p>
+    </div>
+  </section>
+
+  <main id="chatShell" class="shell hidden" aria-hidden="true">
+    <aside class="rail" aria-label="Claufree quick actions">
+      <button id="railNewChat" class="rail-btn" type="button" title="New chat">+</button>
+      <button id="clearLocalData" class="rail-btn" type="button" title="Clear local data">C</button>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <h2>Claufree Chat</h2>
+          <p id="profileMeta">Signed in locally</p>
+        </div>
+        <div class="topbar-actions">
+          <label class="model-picker" for="modelSelect">
+            <span>Model</span>
+            <select id="modelSelect" aria-label="Choose model"></select>
+          </label>
+          <button id="refreshModels" type="button" class="ghost-btn">Refresh</button>
+          <button id="newChat" type="button" class="ghost-btn">New chat</button>
+        </div>
+      </header>
+
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+
+      <section id="hero" class="hero" aria-live="polite">
+        <h3>What's on your mind today?</h3>
+      </section>
+
+      <section id="chat" class="chat" aria-live="polite"></section>
+
+      <form id="composer" class="composer">
+        <input id="imageInput" type="file" accept="image/*" hidden />
+
+        <div class="composer-shell">
+          <button id="attachImage" type="button" class="attach-btn" title="Upload image">+</button>
+          <textarea id="prompt" rows="1" placeholder="Ask anything"></textarea>
+          <button id="sendButton" type="submit" class="send-btn">Send</button>
+        </div>
+
+        <div id="attachmentBar" class="attachment-bar hidden">
+          <span id="attachmentName"></span>
+          <button id="removeImage" type="button" class="ghost-btn danger-btn">Remove</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://js.puter.com/v2/"></script>
+  <script src="app.js"></script>
+</body>
+</html>
